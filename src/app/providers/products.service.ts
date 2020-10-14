@@ -118,26 +118,34 @@ export class ProductsService {
       item.createdAt = new Date()
       console.log('ddd', item)
       // await this.itemsCollection.add(item);
-      this.itemsCollection.add(item).then(res => {
-        // console.log(res);
-      })
+      try {
+        this.itemsCollection.add(item).then(res => {
+          // console.log(res);
+        })
+      } catch (e) {
+        console.error('fail fetching data')
+      }
     } else {
       console.log('no movie received')
     }
   }
 
   async loadMovies () {
-    this.itemsCollection = this.afs.collection<Movie>('movies', ref =>
-      ref.orderBy('createdAt', 'desc')
-    )
-    return this.itemsCollection.valueChanges().pipe(
-      map((movies: Movie[]) => {
-        // console.log(movies);
-        this.movies = movies
-        // console.log(this.movies);
-        return this.movies
-      })
-    )
+    try {
+      this.itemsCollection = this.afs.collection<Movie>('movies', ref =>
+        ref.orderBy('createdAt', 'desc')
+      )
+      return this.itemsCollection.valueChanges().pipe(
+        map((movies: Movie[]) => {
+          // console.log(movies);
+          this.movies = movies
+          // console.log(this.movies);
+          return this.movies
+        })
+      )
+    } catch (e) {
+      console.error('fail loading movies')
+    }
   }
 
   async fetchDataProducts () {
