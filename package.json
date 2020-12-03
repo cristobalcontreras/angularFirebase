@@ -27,7 +27,7 @@
     "firebase": "^7.9.3",
     "lodash": "^4.17.20",
     "ngx-beautiful-charts": "^2.0.7",
-    "rxjs": "~6.5.4",
+    "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
